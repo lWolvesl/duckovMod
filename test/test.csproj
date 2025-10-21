@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <!-- 下面这行里填写你的鸭科夫安装路径，这样编译器就能找到相关的dll文件 -->
+    <DuckovPath>E:\Steam\steamapps\common\Escape from Duckov</DuckovPath>
+    <AssemblyName>test</AssemblyName>
+    <RootNamespace>test</RootNamespace>
+    <!-- 自动生成绑定重定向来解决程序集版本冲突 -->
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <!-- 抑制程序集版本冲突警告 -->
+    <NoWarn>$(NoWarn);MSB3277</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+        <Reference Include="$(DuckovPath)\Duckov_Data\Managed\TeamSoda.*" />
+        <Reference Include="$(DuckovPath)\Duckov_Data\Managed\ItemStatsSystem.dll" />
+        <Reference Include="$(DuckovPath)\Duckov_Data\Managed\Unity*" />
+        <Reference Include="0Harmony">
+          <HintPath>libs\0Harmony.dll</HintPath>
+        </Reference>
+  </ItemGroup>
+  
+  <!-- 解决System.Text.Encoding.Extensions版本冲突 -->
+  <Target Name="AddBindingRedirects" AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <BindingRedirects Include="System.Text.Encoding.Extensions" OldVersion="0.0.0.0-8.0.0.0" NewVersion="4.0.11.0" />
+    </ItemGroup>
+  </Target>
+</Project>
