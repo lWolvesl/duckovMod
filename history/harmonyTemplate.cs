@@ -17,12 +17,12 @@ namespace test
         void Awake()
         {
             // 初始化Harmony实例
-            harmony = new Harmony("com.test.all.patches");
+            harmony = new Harmony("com.test.itemdetailsdisplay");
             
             // 应用所有Harmony补丁
             harmony.PatchAll();
             
-            Debug.Log("Test模组已加载，所有补丁已应用");
+            Debug.Log("Test模组已加载，ItemDetailsDisplay补丁已应用");
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace test
             // 模组启用时重新应用补丁
             if (harmony == null)
             {
-                harmony = new Harmony("com.test.all.patches");
+                harmony = new Harmony("com.test.itemdetailsdisplay");
                 harmony.PatchAll();
             }
         }
